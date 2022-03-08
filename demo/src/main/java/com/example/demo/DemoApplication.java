@@ -18,11 +18,4 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-//	@GetMapping//Get something out of the server
-//	public String hello()
-//	{
-//		return "Hello World";
-//	}
-
-
 }
