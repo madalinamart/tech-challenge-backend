@@ -7,7 +7,12 @@ public class Building {
     private int NumberOfFloors;
     private int NumberOfOffices;
 
-    public Building(Long idBuilding, String buildingName, String buildingAdress, int numberOfFloors, int numberOfOffices) {
+    public Building(Long idBuilding,
+                    String buildingName,
+                    String buildingAdress,
+                    int numberOfFloors,
+                    int numberOfOffices)
+    {
         IdBuilding = idBuilding;
         BuildingName = buildingName;
         BuildingAdress = buildingAdress;
@@ -18,7 +23,11 @@ public class Building {
     public Building() {
     }
 
-    public Building(String buildingName, String buildingAdress, int numberOfFloors, int numberOfOffices) {
+    public Building(String buildingName,
+                    String buildingAdress,
+                    int numberOfFloors,
+                    int numberOfOffices)
+    {
         BuildingName = buildingName;
         BuildingAdress = buildingAdress;
         NumberOfFloors = numberOfFloors;

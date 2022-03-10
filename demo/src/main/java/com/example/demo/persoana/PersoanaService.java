@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class PersoanaService {
 
-    public List<Persoana> getPersoane()
+    public List<Persoana> getPersoana()
     {
         return List.of(
                 new Persoana(
