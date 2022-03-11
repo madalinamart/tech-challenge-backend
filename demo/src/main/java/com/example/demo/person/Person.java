@@ -1,7 +1,6 @@
 package com.example.demo.person;
 
 import com.example.demo.user.User;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,20 +9,12 @@ import java.time.LocalDate;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
-    private String FirstName;
-    private String LastName;
-    private LocalDate DateOfBirth;
-    private String Gender;
-    private String Nationality;
-    @ManyToOne
-    @JoinColumn(name = "id_user_id")
-    private User IdUser;
-
-    public User getIdUser() {
-        return IdUser;
-    }
-
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private LocalDate dateOfBirth;
+    private String gender;
+    private String nationality;
 
     public Person() {
     }
@@ -34,81 +25,89 @@ public class Person {
                   LocalDate dateOfBirth,
                   String gender,
                   String nationality) {
-        Id = id;
-        FirstName = firstName;
-        LastName = lastName;
-        DateOfBirth = dateOfBirth;
-        Gender = gender;
-        Nationality = nationality;
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.nationality = nationality;
     }
 
     @Id
     @Column(name="ID")
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     @Basic
-    @Column(name = "FirstName",nullable = false)
+    @Column(name = "FirstName")
      public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
     @Basic
-    @Column(name = "LastName",nullable = false)
+    @Column(name = "LastName")
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     @Basic
-    @Column(name = "Gender",nullable = false)
+    @Column(name = "Gender")
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
     @Basic
-    @Column(name = "Nationality",nullable = true)
+    @Column(name = "Nationality")
     public String getNationality() {
-        return Nationality;
+        return nationality;
     }
 
     public void setNationality(String nationality) {
-        Nationality = nationality;
+        this.nationality = nationality;
     }
     @Basic
-    @Column(name = "DateOfBirth",nullable = true)
+    @Column(name = "DateOfBirth")
     public LocalDate getDateOfBirth() {
-        return DateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        DateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "IdUser")
+    private User IdUser;
+
+    public User getIdUser() {
+        return IdUser;
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "Id=" + Id +
-                ", FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", DateOfBirth=" + DateOfBirth +
-                ", Gender='" + Gender + '\'' +
-                ", Nationality='" + Nationality + '\'' +
+                "Id=" + id +
+                ", FirstName='" + firstName + '\'' +
+                ", LastName='" + lastName + '\'' +
+                ", DateOfBirth=" + dateOfBirth +
+                ", Gender='" + gender + '\'' +
+                ", Nationality='" + nationality + '\'' +
                 ", IdUser=" + IdUser +
                 '}';
     }

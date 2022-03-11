@@ -2,13 +2,16 @@ package com.example.demo.person;
 
 import com.example.demo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
+
 import java.util.List;
 
 //@Component
 //SERVICE LAYER
 @Service
+@Repository
+
 public class PersonService {
     @Autowired
     private static PersonRepository personRepository;
