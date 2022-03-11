@@ -1,6 +1,7 @@
 package com.example.demo.persoana;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Persoana {
     private Long IdPersoana;
@@ -23,8 +24,7 @@ public class Persoana {
                     String rolePersoana,
                     String gender,
                     String nationality,
-                    LocalDate dateOfBirth,
-                    int agePersoana)
+                    LocalDate dateOfBirth)
     {
         IdPersoana = idPersoana;
         EmailPersoana = emailPersoana;
@@ -34,7 +34,7 @@ public class Persoana {
         Gender = gender;
         Nationality = nationality;
         DateOfBirth = dateOfBirth;
-        AgePersoana = agePersoana;
+        AgePersoana = Period.between(DateOfBirth, LocalDate.now()).getYears();
     }
 
     public Persoana(String emailPersoana,
@@ -43,8 +43,7 @@ public class Persoana {
                     String rolePersoana,
                     String gender,
                     String nationality,
-                    LocalDate dateOfBirth,
-                    int agePersoana)
+                    LocalDate dateOfBirth)
     {
         EmailPersoana = emailPersoana;
         FirstName = firstName;
@@ -53,7 +52,7 @@ public class Persoana {
         Gender = gender;
         Nationality = nationality;
         DateOfBirth = dateOfBirth;
-        AgePersoana = agePersoana;
+        AgePersoana = Period.between(DateOfBirth, LocalDate.now()).getYears();
     }
 
     public Long getIdPersoana() {
@@ -121,7 +120,7 @@ public class Persoana {
     }
 
     public int getAgePersoana() {
-        return AgePersoana;
+        return Period.between(DateOfBirth, LocalDate.now()).getYears();
     }
 
     public void setAgePersoana(int agePersoana) {
