@@ -16,10 +16,9 @@ public class Employee extends Persoana {
                     String rolePersoana,
                     String gender,
                     String nationality,
-                    LocalDate dateOfBirth,
-                    int agePersoana)
+                    LocalDate dateOfBirth)
     {
-        super(idPersoana, emailPersoana, firstName, lastName, rolePersoana, gender, nationality, dateOfBirth, agePersoana);
+        super(idPersoana, emailPersoana, firstName, lastName, rolePersoana, gender, nationality, dateOfBirth);
     }
 
     public Employee(String emailPersoana,
@@ -28,9 +27,8 @@ public class Employee extends Persoana {
                     String rolePersoana,
                     String gender,
                     String nationality,
-                    LocalDate dateOfBirth,
-                    int agePersoana)
+                    LocalDate dateOfBirth)
     {
-        super(emailPersoana, firstName, lastName, rolePersoana, gender, nationality, dateOfBirth, agePersoana);
+        super(emailPersoana, firstName, lastName, rolePersoana, gender, nationality, dateOfBirth);
     }
 }

@@ -20,8 +20,7 @@ public class EmployeeService {
                         "Inginer(employee)",
                         "F",
                         "Italian",
-                        LocalDate.of(2000,1,7),
-                        22
+                        LocalDate.of(2000,1,7)
                 )
         );
     }
