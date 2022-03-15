@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
@@ -14,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.time.LocalDate;
 import java.util.List;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 
 public class DemoApplication {
 
