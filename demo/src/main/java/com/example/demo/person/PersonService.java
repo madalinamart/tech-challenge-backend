@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 
 public class PersonService {
-    @Autowired
+
     private static PersonRepository personRepository;
 
     public Person saveUser(Person person) {

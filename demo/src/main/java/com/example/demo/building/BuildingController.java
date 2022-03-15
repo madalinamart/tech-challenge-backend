@@ -18,9 +18,4 @@ public class BuildingController {
         this.buildingService = buildingService;
     }
 
-    @GetMapping
-    public List<Building> getBuildings()
-    {
-        return buildingService.getBuildings();
-    }
 }

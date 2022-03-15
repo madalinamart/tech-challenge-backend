@@ -14,10 +14,10 @@ import java.util.List;
 public class PersonController {
 
 
-    @Autowired
+
     private PersonService personService;
 
-    @GetMapping
+    @GetMapping(value= "/all")
     public List<Person> getPersons()
     {
         return personService.getPersons();

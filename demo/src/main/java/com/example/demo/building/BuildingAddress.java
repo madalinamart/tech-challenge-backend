@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name ="Buildings")
 
-public class Building {
+public class BuildingAddress {
 
 
     @Id
@@ -22,20 +22,20 @@ public class Building {
 
 
     @Basic
-    @Column(name = "BuildingName")
-    private String buildingName;
-
-    @ManyToOne
-    @JoinColumn(name = "IdBuildingAddress")
-    private BuildingAddress idBuildingAddress;
+    @Column(name = "Province")
+    private String province;
 
 
     @Basic
-    @Column(name = "TotalFloors")
-    private int totalFloors;
+    @Column(name = "City")
+    private String city;
 
     @Basic
-    @Column(name = "TotalOffices")
-    private int totalOffices;
+    @Column(name = "Street")
+    private String street;
 
+
+    @Basic
+    @Column(name = "Number")
+    private int number;
 }

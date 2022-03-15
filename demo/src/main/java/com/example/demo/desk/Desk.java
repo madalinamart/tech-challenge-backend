@@ -1,20 +1,47 @@
 package com.example.demo.desk;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.example.demo.building.Building;
+import com.example.demo.office.Office;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name ="Desks")
+
 public class Desk {
+
+
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID")
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Basic
+    @Column(name = "DeskName")
+    private String deskName;
+
+    @Basic
+    @Column(name = "Vacancy")
+    private int floorNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "IdOffice")
+    private Office idOffice;
+
+
+
+
+
+
+
+
+
 }
