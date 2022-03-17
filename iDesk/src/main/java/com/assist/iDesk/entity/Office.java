@@ -1,17 +1,20 @@
 package com.assist.iDesk.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-
+import java.util.Objects;
 @Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name ="Offices")
+@Table(name = "Offices", schema = "public")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class Office {
 
@@ -45,8 +48,6 @@ public class Office {
     @Basic
     @Column(name = "OfficeAdministrator")
     private String officeAdministrator;
-
-
 
 
 }

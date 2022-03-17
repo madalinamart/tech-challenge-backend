@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(path="/user")
 public class UserController {
 
     @Autowired
@@ -18,7 +19,7 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    @PostMapping("/user/addUserAdmin")
+    @PostMapping(value ="/addUserAdmin")
     public User addUserAdmin(@RequestBody User user) {
 
         String pwd = user.getPassword();
@@ -28,7 +29,7 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @PostMapping("/user/addUserOfficeAdmin")
+    @PostMapping(value = "/addUserOfficeAdmin")
     public User addUserOfficeAdmin(@RequestBody User user) {
 
         String pwd = user.getPassword();
@@ -38,7 +39,7 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @PostMapping("/user/addUserEmployee")
+    @PostMapping(value = "/addUserEmployee")
     public User addUserEmployee(@RequestBody User user) {
 
         String pwd = user.getPassword();
@@ -48,13 +49,13 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @GetMapping("/user/list")
+    @GetMapping(value = "/list")
     public List<User> getUsers() {
 
         return userService.getUsers();
     }
 
-    @GetMapping("/user/id/{id}")
+    @GetMapping(value = "/id/{id}")
     public ResponseEntity findUserById(@PathVariable Long id) {
 
         return userService.getUserById(id);

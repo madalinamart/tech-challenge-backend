@@ -20,21 +20,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Setter
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    @Override
-    public User getUser(String email) {
-        return null;
-    }
 
-    @Override
     public List<User> getUsers() {
         return userRepository.findAll() ;
     }
@@ -67,9 +61,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public ResponseEntity getUserById(Long id) {
-        if (userRepository.count() >= 2 && userRepository.findById(id).orElse(null) != null)
+        if (userRepository.findById(id).orElse(null) != null)
             return new ResponseEntity<>(userRepository.findById(id), HttpStatus.OK);
-        return new ResponseEntity<>("There is no registred user with id <" + id + ">.", HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<>("There is no registred user with id <" + id + ">.", HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity updateUser(User user, Long id) {

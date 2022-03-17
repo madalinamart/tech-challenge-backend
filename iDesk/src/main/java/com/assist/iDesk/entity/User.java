@@ -12,15 +12,16 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
-
+@Data
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Users")
-public class User  implements UserDetails  {
+@Table(name = "Users", schema = "public")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class User implements UserDetails  {
 
 
     @Id
@@ -104,17 +105,6 @@ public class User  implements UserDetails  {
         return status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
 
