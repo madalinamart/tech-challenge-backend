@@ -21,7 +21,7 @@ import java.util.Objects;
 @Entity
 @Table(name ="Users")
 
-public class User implements UserDetails {
+public class User extends Person implements UserDetails  {
 
 
     @Id
