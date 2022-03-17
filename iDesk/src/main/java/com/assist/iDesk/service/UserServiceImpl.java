@@ -3,6 +3,7 @@ package com.assist.iDesk.service;
 import com.assist.iDesk.entity.User;
 import com.assist.iDesk.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Setter
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public List<User> getUsers() {
-        return null;
+        return userRepository.findAll() ;
     }
 
     @Override
@@ -64,14 +66,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public ResponseEntity getUserById(int id) {
-        if (userRepository.count() >= 2 && userRepository.findById(Long.valueOf(id)).orElse(null) != null)
-            return new ResponseEntity<>(userRepository.findById(Long.valueOf(id)), HttpStatus.OK);
+    public ResponseEntity getUserById(Long id) {
+        if (userRepository.count() >= 2 && userRepository.findById(id).orElse(null) != null)
+            return new ResponseEntity<>(userRepository.findById(id), HttpStatus.OK);
         return new ResponseEntity<>("There is no registred user with id <" + id + ">.", HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity updateUser(User user, int id) {
-        User existingUser = userRepository.findById(Long.valueOf(id)).orElse(null);
+    public ResponseEntity updateUser(User user, Long id) {
+        User existingUser = userRepository.findById(id).orElse(null);
         String response = isValidUpdate(user);
         if (existingUser != null) {
             if (response == null || response.equals("")) {
@@ -90,8 +92,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         return new ResponseEntity<>("Can't find user with id <" + id + ">.", HttpStatus.BAD_REQUEST);
 
-
-
-
     }
+    /*
+    public ResponseEntity deactivateUser(Long id){
+        if (userRepository.existsById(id)==true) {
+            userRepository.deactived(false);
+            return new ResponseEntity<>("User with id <" + id + "> has been deactivate.", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Can't find user with id <" + id + ">.", HttpStatus.BAD_REQUEST);
+
+    }*/
 }

@@ -19,32 +19,35 @@ public class UserController {
     private BCryptPasswordEncoder encoder;
 
     @PostMapping("/user/addUserAdmin")
-    public User addUserAdmin(@RequestBody User user){
+    public User addUserAdmin(@RequestBody User user) {
 
-        String pwd=user.getPassword();
+        String pwd = user.getPassword();
         String encryptPassword = encoder.encode(pwd);
         user.setPassword(encryptPassword);
         user.setRole("Administration");
         return userService.saveUser(user);
     }
-    @PostMapping("/user/addUserOfficeAdmin")
-    public User addUserOfficeAdmin(@RequestBody User user){
 
-        String pwd=user.getPassword();
+    @PostMapping("/user/addUserOfficeAdmin")
+    public User addUserOfficeAdmin(@RequestBody User user) {
+
+        String pwd = user.getPassword();
         String encryptPassword = encoder.encode(pwd);
         user.setPassword(encryptPassword);
         user.setRole("OfficeAdministration");
         return userService.saveUser(user);
     }
-    @PostMapping("/user/addUserEmployee")
-    public User addUserEmployee(@RequestBody User user){
 
-        String pwd=user.getPassword();
+    @PostMapping("/user/addUserEmployee")
+    public User addUserEmployee(@RequestBody User user) {
+
+        String pwd = user.getPassword();
         String encryptPassword = encoder.encode(pwd);
         user.setPassword(encryptPassword);
         user.setRole("Employee");
         return userService.saveUser(user);
     }
+
     @GetMapping("/user/list")
     public List<User> getUsers() {
 
@@ -52,23 +55,33 @@ public class UserController {
     }
 
     @GetMapping("/user/id/{id}")
-    public ResponseEntity findUserById(@PathVariable int id) {
+    public ResponseEntity findUserById(@PathVariable Long id) {
 
         return userService.getUserById(id);
     }
+
     @PutMapping("/user/update/{id}")
-    public ResponseEntity updateUser(@RequestBody User user, @PathVariable int id) {
+    public ResponseEntity updateUser(@RequestBody User user, @PathVariable Long id) {
 
         return userService.updateUser(user, id);
 
     }
-
-
-
-
-
-
+    /*
+    @PutMapping("/user/deactivate/{id}")
+    public ResponseEntity deactivateUser(@PathVariable Long id){
+        return userService.deactivateUser(id);
+    }*/
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
