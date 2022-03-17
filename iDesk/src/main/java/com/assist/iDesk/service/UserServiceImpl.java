@@ -24,15 +24,39 @@ public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    private String isValidAdd(User user) {
+        String response = "";
+        Optional<User> optUser = Optional.ofNullable(user);
+        if (optUser.isPresent()) {
+            if (userRepository.findByRole(user.getRole()) == null)
+                response += "There is no role <" + user.getRole() + "> available.\n";
+            if (user.getFirstName() != null && (user.getFirstName().length() < 5 || user.getFirstName().length() > 20))
+                response += "The FirstName length should be between 5 and 20 characters.\n";
+            if (user.getLastName() != null && (user.getLastName().length() < 5 || user.getLastName().length() > 20))
+                response += "The FirstName length should be between 5 and 20 characters.\n";
+            if (user.getEmail() != null && (user.getEmail().length() < 5 || user.getEmail().length() > 40 || !user.getEmail().contains("@") || !user.getEmail().contains(".") || userRepository.findByEmail(user.getEmail()) != null))
+                response += "Invalid/duplicate email. (must contain '@', '.' and has a length between 5 and 40 characters.\n";
+            if (user.getGender() != null && (user.getGender().contains("Male") || user.getGender().contains("Female") || user.getGender().contains("Other")))
+                response += "Invalid/duplicate gender. (must contain Male or Female or Other.\n";
+        }
+            return response;
+
+    }
+    public ResponseEntity saveUser(User user) {
+        String response = isValidAdd(user);
+        if (response == null || response.equals("")) {
+            userRepository.save(user);
+            return new ResponseEntity<>("User with id <" + user.getId() + "> has been added.", HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-
-    public List<User> getUsers() {
-        return userRepository.findAll() ;
+    public ResponseEntity getUsers() {
+        System.out.println(userRepository.count());
+        if (userRepository.count() == 0)
+            return new ResponseEntity<>("There are no users yet.", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email);
@@ -48,7 +72,7 @@ public class UserServiceImpl implements UserDetailsService {
                 response += "The last name length should be between 5 and 20 characters.\n";
             if (user.getEmail() != null && (user.getEmail().length() < 5 || user.getEmail().length() > 40 || !user.getEmail().contains("@") || !user.getEmail().contains(".") || (userRepository.findByEmail(user.getEmail()) != null) && userRepository.countByEmail(user.getEmail()) > 1))
                 response += "Invalid/duplicate email. (must contain '@', '.' and has a length between 5 and 40 characters.\n";
-            if (userRepository.findByRole(Long.valueOf(user.getRole())) == null)
+            if (userRepository.findByRole(user.getRole()) == null)
                 response += "There is no role <" + user.getRole() + "> available.\n";
             if (user.getGender() != null && (user.getGender().contains("Male")  || user.getGender().contains("Female")|| user.getGender().contains("Other")))
                 response += "The gender should be Male,Female or Other.\n";
@@ -63,8 +87,8 @@ public class UserServiceImpl implements UserDetailsService {
     public ResponseEntity getUserById(Long id) {
         if (userRepository.findById(id).orElse(null) != null)
             return new ResponseEntity<>(userRepository.findById(id), HttpStatus.OK);
-        else
-            return new ResponseEntity<>("There is no registred user with id <" + id + ">.", HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>("There is no registred user with id <" + id + ">.", HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity updateUser(User user, Long id) {

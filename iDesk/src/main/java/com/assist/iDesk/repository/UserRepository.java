@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     UserDetails findByEmail(String email);
 
     @Query("SELECT role FROM User where role is not null")
-    User findByRole(Long id);
+    User findByRole(String role);
 
     int countByEmail(String email);
     boolean existsById(Long id);

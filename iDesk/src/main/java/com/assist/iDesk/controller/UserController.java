@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(path="/user")
 public class UserController {
@@ -19,8 +17,8 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    @PostMapping(value ="/addUserAdmin")
-    public User addUserAdmin(@RequestBody User user) {
+    @PostMapping(value ="/addAdmin")
+    public ResponseEntity addUserAdmin(@RequestBody User user) {
 
         String pwd = user.getPassword();
         String encryptPassword = encoder.encode(pwd);
@@ -29,8 +27,8 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @PostMapping(value = "/addUserOfficeAdmin")
-    public User addUserOfficeAdmin(@RequestBody User user) {
+    @PostMapping(value = "/addOfficeAdmin")
+    public ResponseEntity addUserOfficeAdmin(@RequestBody User user) {
 
         String pwd = user.getPassword();
         String encryptPassword = encoder.encode(pwd);
@@ -39,8 +37,8 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @PostMapping(value = "/addUserEmployee")
-    public User addUserEmployee(@RequestBody User user) {
+    @PostMapping(value = "/addEmployee")
+    public ResponseEntity addUserEmployee(@RequestBody User user) {
 
         String pwd = user.getPassword();
         String encryptPassword = encoder.encode(pwd);
@@ -50,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/list")
-    public List<User> getUsers() {
+    public ResponseEntity getUsers() {
 
         return userService.getUsers();
     }
@@ -61,7 +59,7 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PutMapping("/user/update/{id}")
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity updateUser(@RequestBody User user, @PathVariable Long id) {
 
         return userService.updateUser(user, id);
