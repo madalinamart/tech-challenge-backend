@@ -90,8 +90,13 @@ public class BuildindService {
         return new ResponseEntity<>("There is no registred building with name  <" + buildingName + ">.", HttpStatus.BAD_REQUEST);
     }
 
-
-
+    public ResponseEntity deleteBuilding(Long id) {
+        if (buildingRepository.existsById(id)) {
+            buildingRepository.deleteById(id);
+            return new ResponseEntity<>("Building with id <" + id + "> has been removed.", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Can't find building with id <" + id + ">.", HttpStatus.BAD_REQUEST);
+    }
 
 
 }

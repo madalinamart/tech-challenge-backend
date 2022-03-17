@@ -37,5 +37,10 @@ public class BuildingController {
 
         return buildingService.getBuildingByName(buildingName);
     }
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity deleteBuilding(@PathVariable Long id) {
+        return buildingService.deleteBuilding(id);
+    }
+
 
 }
